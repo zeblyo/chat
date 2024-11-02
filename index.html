@@ -41,65 +41,23 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
-        .card.confession {
-            background-color: #ffffff; /* 默认颜色 */
-        }
-        .card.confession.anonymous:hover {
-            background-color: #ffebee; /* 匿名表白卡片悬浮时颜色 */
-        }
-        .card.confession:not(.anonymous):hover {
-            background-color: #ffcccc; /* 表白卡片悬浮时颜色 */
-        }
-        .card.complaint {
-            background-color: #ffffff; /* 默认颜色 */
-        }
-        .card.complaint.anonymous:hover {
-            background-color: #e1f5fe; /* 匿名吐槽卡片悬浮时颜色 */
-        }
-        .card.complaint:not(.anonymous):hover {
-            background-color: #ccffff; /* 吐槽卡片悬浮时颜色 */
-        }
-        .card.gossip {
-            background-color: #ffffff; /* 默认颜色 */
-        }
-        .card.gossip.anonymous:hover {
-            background-color: #fff3e0; /* 匿名八卦卡片悬浮时颜色 */
-        }
-        .card.gossip:not(.anonymous):hover {
-            background-color: #ffe0b2; /* 八卦卡片悬浮时颜色 */
-        }
-        .title {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .content {
-            font-size: 1em;
-            margin-bottom: 10px;
-            color: #555;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .author {
-            font-size: 0.9em;
-            margin-top: 5px;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        .author.anonymous {
-            background-color: #f0f4f8; /* 匿名作者背景色 */
-            color: #777; /* 匿名作者字体颜色 */
-        }
-        .author:not(.anonymous) {
-            background-color: #e0f7fa; /* 非匿名作者背景色 */
-            color: #333; /* 非匿名作者字体颜色 */
-        }
-        .date {
-            font-size: 0.75em;
-            color: #999;
-            margin-top: 10px;
-        }
+        .card.confession { background-color: #ffffff; }
+        .card.confession.anonymous:hover { background-color: #ffebee; }
+        .card.confession:not(.anonymous):hover { background-color: #ffcccc; }
+        .card.complaint { background-color: #ffffff; }
+        .card.complaint.anonymous:hover { background-color: #e1f5fe; }
+        .card.complaint:not(.anonymous):hover { background-color: #ccffff; }
+        .card.gossip { background-color: #ffffff; }
+        .card.gossip.anonymous:hover { background-color: #fff3e0; }
+        .card.gossip:not(.anonymous):hover { background-color: #ffe0b2; }
+        .title { font-size: 1.5em; margin-bottom: 10px; color: #333; }
+        .content { font-size: 1em; margin-bottom: 10px; color: #555; word-wrap: break-word; overflow-wrap: break-word; }
+        .author { font-size: 0.9em; margin-top: 5px; padding: 5px; border-radius: 5px; }
+        .author.anonymous { background-color: #f0f4f8; color: #777; }
+        .author:not(.anonymous) { background-color: #e0f7fa; color: #333; }
+        .date { font-size: 0.75em; color: #999; margin-top: 10px; }
         .floating-email {
+            display: block; /* 默认显示 */
             position: fixed;
             bottom: 80px;
             right: 20px;
@@ -108,34 +66,41 @@
             border-radius: 5px;
             padding: 10px 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        .floating-email-arrow {
+            position: absolute;
+            bottom: 100%;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid rgba(255, 255, 255, 0.9);
+            transform: translateY(-10px);
         }
         .floating-email a {
             color: #d9534f;
             text-decoration: none;
             font-weight: bold;
         }
-        .note {
-            font-size: 0.8em;
-            color: #888;
-            margin-top: 5px;
-        }
-        .copyright {
-            text-align: center;
-            font-size: 0.8em;
-            color: #888;
-            margin-top: 40px;
-        }
-        .notification {
-            display: none;
+        .note { font-size: 0.8em; color: #888; margin-top: 5px; }
+        .copyright { text-align: center; font-size: 0.8em; color: #888; margin-top: 40px; }
+        .toggle-email-button {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(255, 255, 204, 0.9);
-            border: 1px solid #ffd700;
-            border-radius: 5px;
-            padding: 10px 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            bottom: 120px;
+            left: 20px; /* Position to the left */
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center1;
+            justify-content: center;
         }
     </style>
 </head>
@@ -146,7 +111,7 @@
     </div>
     <div class="container">
         <div class="card confession anonymous">
-            <div class="title">❤️ 表白</div>
+            <div class="title">❤️ 匿名表白</div>
             <div class="content">表白高一七班sxy，长的想我初恋，好想让她做我女朋友</div>
             <div class="author anonymous">匿名</div>
             <div class="date">2024-11-02</div>
@@ -154,64 +119,55 @@
         <div class="card confession">
             <div class="title">❤️ 表白</div>
             <div class="content">我喜欢你，从未改变！</div>
-            <div class="author">00届张伟</div>
+            <div class="author">24届张伟</div>
             <div class="date">2024-11-02</div>
         </div>
         <div class="card complaint anonymous">
-            <div class="title">🗣️ 吐槽</div>
+            <div class="title">🗣️ 匿名吐槽</div>
             <div class="content">今天的课真无聊！这节课我几乎听不下去，真希望能有点新意。</div>
             <div class="author anonymous">匿名</div>
-            <div class="date">2024-11-01</div>
-        </div>
-        <div class="card complaint anonymous">
-            <div class="title">🗣️ 吐槽</div>
-            <div class="content">今天的课真无聊！这节课我几乎听不下去，真希望能有点新意。</div>
-            <div class="author">00届王五</div>
             <div class="date">2024-11-01</div>
         </div>
         <div class="card gossip">
             <div class="title">👀 八卦</div>
             <div class="content">听说最近有同学和老师之间发生了趣事，大家都在议论。</div>
-            <div class="author">00届李四</div>
+            <div class="author">24届李四</div>
             <div class="date">2024-10-30</div>
         </div>
         <div class="card gossip anonymous">
-            <div class="title">👀 八卦</div>
+            <div class="title">👀 匿名八卦</div>
             <div class="content">某位同学最近好像对班里的某人特别关注，真是有趣。</div>
             <div class="author anonymous">匿名</div>
             <div class="date">2024-10-29</div>
         </div>
     </div>
 
-    <div class="floating-email">
+    <!-- 悬浮投稿邮箱 -->
+    <div class="floating-email" id="floatingEmail">
+        <div class="floating-email-arrow"></div>
         投稿邮箱: <a href="#" id="email" onclick="copyEmail(event)">aalxpg65@cynb888.com</a>
-        <div class="note">点击邮箱可复制 | 可以使用临时邮箱进行匿名投稿 <a href="https://linshiyou.com/" target="_blank">https://linshiyou.com/</a></div>
+        <div class="note">点击邮箱可复制 | 可以使用临时邮箱进行匿名投稿 <a href="https://linshiyou.com/" target="_blank">临时邮箱</a></div>
     </div>
 
-    <div class="notification" id="notification">邮箱已复制!</div>
-
-    <div class="copyright">
-        一切解释权归校园墙所有。<a href="https://github.com/zeblyo" target="_blank">GitHub</a>。
-    </div>
+    <!-- Toggle button for the floating email -->
+    <button class="toggle-email-button" id="toggleEmailButton" onclick="toggleEmailBox()">👁️‍🗨️</button>
 
     <script>
+        function toggleEmailBox() {
+            const emailBox = document.getElementById('floatingEmail');
+            emailBox.style.display = emailBox.style.display === 'block' ? 'none' : 'block'; // Toggle visibility
+        }
+
         function copyEmail(event) {
-            event.stopPropagation();
-            const email = document.getElementById('email').textContent;
+            event.preventDefault(); // Prevent default link behavior
+            const email = document.getElementById('email').innerText;
             navigator.clipboard.writeText(email).then(() => {
-                showNotification();
-            }).catch(err => {
-                console.error('复制失败: ', err);
+                alert('邮箱已复制: ' + email);
             });
         }
 
-        function showNotification() {
-            const notification = document.getElementById('notification');
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 2000);
-        }
+        // Initialize email box as hidden
+        // document.getElementById('floatingEmail').style.display = 'none';
     </script>
 </body>
 </html>
